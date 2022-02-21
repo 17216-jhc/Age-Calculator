@@ -96,7 +96,7 @@ e_date = tk.Entry(window,width=5)
 
 # Combobox creation
 n = tk.StringVar()
-month_chosen = ttk.Combobox(window, textvariable = n, width=14)
+month_chosen = ttk.Combobox(window, textvariable = n, width=14, state="readonly")
 
 # Adding combobox drop down list
 month_chosen['values'] = ('Select a month...', 
