@@ -1,6 +1,5 @@
 ''' AGE Calculator
-Source: https://www.askpython.com/python-modules/tkinter/age-calculator
-Date: 22/01/2022
+Source: https://www.askpython.com/python-modules/tkinter/age-calculator --> Minimum Viable Product (Starting Code)
  '''
 # ____________   IMPORTS ________________
 # Getting current date from import date function from datetime module
@@ -8,12 +7,14 @@ from datetime import date
 # used to create a custom window for age calculator
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import ttk
 
 # ____________   FUNCTIONS ________________
 def get_age():
     # gets the three entries
     d= int(e_date.get())
-    m=int(e_month.get())
+    m = month_chosen.current()
+    #m = e_month.get()
     y=int(e_year.get())
 
 
@@ -36,25 +37,26 @@ def display_calc_age(age):
 def validation():
   # gets the three entries
   d = e_date.get()
-  m = e_month.get()
+  m = month_chosen.current()
+  #m = e_month.get()
   y = e_year.get()
 
   msg = ''
 
-  if len(d) == 0 or len(m) == 0 or len (y) == 0:
+  if len(d) == 0 or len (y) == 0:
       msg = 'day, month and year can\'t be empty'
   else:
     try:
       if any(ch.isdigit() for ch in d) == False:
         msg = 'day must be a NUMBER'
-      elif any(ch.isdigit() for ch in m) == False:
-        msg = 'month must be a NUMBER'
+      elif m == 0:
+        msg = 'choose an appropriate MONTH'
       elif any(ch.isdigit() for ch in y) == False:
         msg = 'year must be a NUMBER'
       else:
-        msg = 'Success!'
+        #msg = 'Success!'
         day = int(d)
-        month = int(m)
+        month = m #month is already in number from list position
         year = int(y)
         calc_age = find_age(day, month, year)
         display_calc_age(calc_age)
@@ -62,7 +64,8 @@ def validation():
     except Exception as ep:
       messagebox.showerror('error', ep)
 
-  messagebox.showinfo('message', msg)
+  if msg != '':
+    messagebox.showinfo('message', msg)
 
 def exit():
   window.destroy()
@@ -90,7 +93,29 @@ lb_year = tk.Label(window,text = "Year: ",font=('Arial',12,"bold"),fg="darkgreen
 
 # Entry boxes for date, month and year
 e_date = tk.Entry(window,width=5)
-e_month = tk.Entry(window,width=5)
+
+# Combobox creation
+n = tk.StringVar()
+month_chosen = ttk.Combobox(window, textvariable = n, width=14)
+
+# Adding combobox drop down list
+month_chosen['values'] = ('Select a month...', 
+                          'January', 
+                          'February',
+                          'March',
+                          'April',
+                          'May',
+                          'June',
+                          'July',
+                          'August',
+                          'September',
+                          'October',
+                          'November',
+                          'December')
+# Shows Select a month as a default value
+month_chosen.current(0)
+#e_month = tk.Entry(window,width=5)
+
 e_year = tk.Entry(window,width=5)
 
 # Button to calculate age 
@@ -107,13 +132,14 @@ btn_exit = tk.Button(window,text="Exit Application!",font=("Arial",13),command=e
 # Placing the elements on the screen
 lb_heading.place(x=70,y=5)
 lb_subheading.place(x=10,y=40)
-lb_date.place(x=60,y=80)
-lb_month.place(x=60,y=105)
-lb_year.place(x=60,y=130)
+lb_date.place(x=20,y=80)
+lb_month.place(x=20,y=105)
+lb_year.place(x=20,y=130)
 e_date.place(x=120,y=80)
-e_month.place(x=120,y=105)
+#e_month.place(x=120,y=105)
+month_chosen.place(x=120,y=105)
 e_year.place(x=120,y=130)
 btn_calculate_age.place(x=30,y=170)
 lb_calculated_age.place(x=230,y=70)
-tbox_age.place(x=300,y=100)
+tbox_age.place(x=350,y=100)
 btn_exit.place(x=300,y=170)
