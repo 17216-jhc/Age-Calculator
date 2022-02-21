@@ -2,8 +2,16 @@
 Source: https://www.askpython.com/python-modules/tkinter/age-calculator
 Date: 22/01/2022
  '''
-# Creating a custom window
+# ____________   IMPORTS ________________
+# Getting current date from import date function from datetime module
+from datetime import date
+# used to create a custom window for age calculator
 import tkinter as tk
+
+# Create a object which stores today’s whole date using datetime function
+today = date.today()
+
+# Creating a custom window
 window = tk.Tk()
 window.geometry("400x300")
 window.config(bg="#F7DC6F")
