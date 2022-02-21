@@ -8,6 +8,24 @@ from datetime import date
 # used to create a custom window for age calculator
 import tkinter as tk
 
+# ____________   FUNCTIONS ________________
+def get_age():
+    # gets the three entries
+    d= int(e_date.get())
+    m=int(e_month.get())
+    y=int(e_year.get())
+
+    # find the age ( difference between current and date of birth )
+    age = today.year-y-((today.month, today.day)<(m,d))
+    tbox_age.config(state='normal')
+
+    #age calculated is inserted into the text box after clearing the previous info in the textbox. 
+    tbox_age.delete('1.0', tk.END)
+    tbox_age.insert(tk.END,age)
+    tbox_age.config(state='disabled')
+    
+# ____________   MAIN  ________________
+
 # Create a object which stores today’s whole date using datetime function
 today = date.today()
 
@@ -33,7 +51,7 @@ e_month = tk.Entry(window,width=5)
 e_year = tk.Entry(window,width=5)
 
 # Button to calculate age 
-btn_calculate_age = tk.Button(window,text="Calculate Age!",font=("Arial",13), command='get_age')
+btn_calculate_age = tk.Button(window,text="Calculate Age!",font=("Arial",13), command=get_age)
 
 # Label for text box that will display the calculated age
 lb_calculated_age = tk.Label(window,text="The Calculated Age is: ",font=('Arial',12,"bold"),fg="darkgreen",bg="#F7DC6F")
