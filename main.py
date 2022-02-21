@@ -23,7 +23,10 @@ def get_age():
     tbox_age.delete('1.0', tk.END)
     tbox_age.insert(tk.END,age)
     tbox_age.config(state='disabled')
-    
+
+def exit():
+  window.destroy()
+
 # ____________   MAIN  ________________
 
 # Create a object which stores today’s whole date using datetime function
