@@ -34,7 +34,7 @@ today = date.today()
 
 # Creating a custom window
 window = tk.Tk()
-window.geometry("400x300")
+window.geometry("500x300")
 window.config(bg="#F7DC6F")
 window.resizable(width=False,height=False)
 window.title('Age Calculator!')
@@ -57,7 +57,8 @@ e_year = tk.Entry(window,width=5)
 btn_calculate_age = tk.Button(window,text="Calculate Age!",font=("Arial",13), command=get_age)
 
 # Label for text box that will display the calculated age
-lb_calculated_age = tk.Label(window,text="The Calculated Age is: ",font=('Arial',12,"bold"),fg="darkgreen",bg="#F7DC6F")
+lb_calculated_age = tk.Label(window,text="The Calculated Age is:   ",font=('Arial',12,"bold"),fg="darkgreen",bg="#F7DC6F")
+
 tbox_age=tk.Text(window,width=5,height=0,state="disabled")
 
 # Button to exit application
@@ -73,6 +74,6 @@ e_date.place(x=180,y=70)
 e_month.place(x=180,y=95)
 e_year.place(x=180,y=120)
 btn_calculate_age.place(x=100,y=150)
-lb_calculated_age.place(x=50,y=200)
+lb_calculated_age.place(x=35,y=202)
 tbox_age.place(x=240,y=203)
 btn_exit.place(x=100,y=230)
