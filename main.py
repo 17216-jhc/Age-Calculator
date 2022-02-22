@@ -40,19 +40,18 @@ def validation():
   m = month_chosen.current()
   #m = e_month.get()
   y = e_year.get()
-
   msg = ''
 
   if len(d) == 0 or len (y) == 0:
-      msg = 'day, month and year can\'t be empty'
+      msg = 'day, month and / or year can\'t be empty'
   else:
     try:
       if any(ch.isdigit() for ch in d) == False:
-        msg = 'day must be a NUMBER'
+        msg = 'day must be a NUMBER, EG: 5, not five or fifth'
       elif m == 0:
         msg = 'choose an appropriate MONTH'
       elif any(ch.isdigit() for ch in y) == False:
-        msg = 'year must be a NUMBER'
+        msg = 'year must be a NUMBER, EG: 2005, not two thousand and five'
       else:
         #msg = 'Success!'
         day = int(d)
@@ -119,12 +118,12 @@ month_chosen.current(0)
 e_year = tk.Entry(window,width=5)
 
 # Button to calculate age 
-btn_calculate_age = tk.Button(window,text="Calculate Age!",font=("Arial",13), command=get_age)
+btn_calculate_age = tk.Button(window,text="Calculate Age!",font=("Arial",13), command=validation)
 
 # Label for text box that will display the calculated age
 lb_calculated_age = tk.Label(window,text="The Calculated Age is:   ",font=('Arial',12,"bold"),fg="darkgreen",bg="#F7DC6F")
 
-tbox_age=tk.Text(window,width=3,height=0,state="disabled",bg="lightgreen",font=('Arial',24,"bold"))
+tbox_age=tk.Text(window,width=5,height=0,state="disabled",bg="lightgreen",font=('Arial',24,"bold"))
 
 # Button to exit application
 btn_exit = tk.Button(window,text="Exit Application!",font=("Arial",13),command=exit)
