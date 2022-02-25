@@ -10,6 +10,10 @@ from tkinter import messagebox
 from tkinter import ttk
 
 # ____________   FUNCTIONS ________________
+#clear text box
+def clearBox(self):
+    self.txt1.delete("1.0", "end")
+
 def get_age():
     # gets the three entries
     d= int(e_date.get())
@@ -34,6 +38,19 @@ def display_calc_age(age):
     tbox_age.insert(tk.END,age)
     tbox_age.config(state='disabled')
 
+def date_check(question,low,high):
+  error = "please enter an interger between \ {} and {}".format(low, high)
+  valid=False
+  while not valid:
+    try:
+      response=int(input(question))
+      if 1 <= response <= 31:
+        return(response)
+      else:
+        print(error)
+    except ValueError:
+      print(error)
+
 def validation():
   # gets the three entries
   d = e_date.get()
@@ -44,21 +61,51 @@ def validation():
 
   if len(d) == 0 or len (y) == 0:
       msg = 'day, month and / or year can\'t be empty'
+      calc_age = ' '
+      display_calc_age(calc_age)
   else:
     try:
       if any(ch.isdigit() for ch in d) == False:
         msg = 'day must be a NUMBER, EG: 5, not five or fifth'
+        calc_age = ' '
+        display_calc_age(calc_age)
       elif m == 0:
         msg = 'choose an appropriate MONTH'
+        calc_age = ' '
+        display_calc_age(calc_age)
       elif any(ch.isdigit() for ch in y) == False:
         msg = 'year must be a NUMBER, EG: 2005, not two thousand and five'
+        calc_age = ' '
+        display_calc_age(calc_age)
       else:
         #msg = 'Success!'
         day = int(d)
         month = m #month is already in number from list position
         year = int(y)
-        calc_age = find_age(day, month, year)
-        display_calc_age(calc_age)
+        #Checks if day is possible in a month
+        if day == 0 or year == 0 or day > 31:
+          msg = 'Day or Year must exist (>31)'
+          calc_age = ' '
+          display_calc_age(calc_age)
+        else:
+            #checks if year is over the current year
+          if year > today.year:
+            msg = 'Year cannot be over current year' 
+            calc_age = ' '
+            display_calc_age(calc_age)
+          else:
+              #checks if month is feb.
+            if month == 2:
+              if day > 28:
+                msg = 'Day or Year must exist (feb)'
+                calc_age = ' '
+                display_calc_age(calc_age)
+              else:
+                calc_age = find_age(day, month, year)
+                display_calc_age(calc_age)
+            else:
+              calc_age = find_age(day, month, year)
+              display_calc_age(calc_age)
 
     except Exception as ep:
       messagebox.showerror('error', ep)
