@@ -57,7 +57,11 @@ def validation():
   m = month_chosen.current()
   #m = e_month.get()
   y = e_year.get()
+  y_int = int (e_year.get())
   msg = ''
+
+  is_leapyear = y_int % 4 == 0 and (y_int % 100 != 0 or y_int % 400 == 0) 
+  print("Leapyear", is_leapyear)
 
   if len(d) == 0 or len (y) == 0:
       msg = 'day, month and / or year can\'t be empty'
@@ -84,7 +88,7 @@ def validation():
         year = int(y)
         #Checks if day is possible in a month
         if day == 0 or year == 0 or day > 31:
-          msg = 'Day or Year must exist (>31)'
+          msg = 'Day or Year must exist - there are only 31 days and more than 0 days in this month idiot you ritared person'
           calc_age = ' '
           display_calc_age(calc_age)
         else:
@@ -93,20 +97,27 @@ def validation():
             msg = 'Year cannot be over current year' 
             calc_age = ' '
             display_calc_age(calc_age)
-          else:
-              #checks if month is feb.
-            if month == 2:
+            
+          elif month == 2: #checks if month is feb.
               if day > 28:
-                msg = 'Day or Year must exist (feb)'
+                msg = 'Day or Year must exist - there are only 28 days in February'
                 calc_age = ' '
                 display_calc_age(calc_age)
               else:
                 calc_age = find_age(day, month, year)
                 display_calc_age(calc_age)
-            else:
-              calc_age = find_age(day, month, year)
-              display_calc_age(calc_age)
-
+          elif month in (4, 6, 9, 11):
+              if day > 30:
+                msg = 'Day or Year must exist - there are only 30 days in This month'
+                calc_age = ' '
+                display_calc_age(calc_age)
+              else:
+                calc_age = find_age(day, month, year)
+                display_calc_age(calc_age)
+          else:
+            calc_age = find_age(day, month, year)
+            display_calc_age(calc_age)
+            
     except Exception as ep:
       messagebox.showerror('error', ep)
 
