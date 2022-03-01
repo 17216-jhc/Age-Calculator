@@ -68,7 +68,6 @@ def validation():
       display_calc_age(calc_age)
   else:
     try:
-      if
       if any(ch.isdigit() for ch in d) == False:
         msg = 'day must be a NUMBER, EG: 5, not five or fifth'
         calc_age = ' '
@@ -97,6 +96,10 @@ def validation():
             msg = 'Year cannot be over current year' 
             calc_age = ' '
             display_calc_age(calc_age)
+          
+          elif is_leapyear == True and month == 2 and day <= 29:
+            calc_age = find_age(day, month, year)
+            display_calc_age(calc_age)
             
           elif month == 2: #checks if month is feb.
               if day > 28:
@@ -106,6 +109,7 @@ def validation():
               else:
                 calc_age = find_age(day, month, year)
                 display_calc_age(calc_age)
+                
           elif month in (4, 6, 9, 11):
               if day > 30:
                 msg = 'Day or Year must exist - there are only 30 days in This month'
