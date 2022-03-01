@@ -61,7 +61,6 @@ def validation():
   msg = ''
 
   is_leapyear = y_int % 4 == 0 and (y_int % 100 != 0 or y_int % 400 == 0) 
-  print("Leapyear", is_leapyear)
 
   if len(d) == 0 or len (y) == 0:
       msg = 'day, month and / or year can\'t be empty'
@@ -69,6 +68,7 @@ def validation():
       display_calc_age(calc_age)
   else:
     try:
+      if
       if any(ch.isdigit() for ch in d) == False:
         msg = 'day must be a NUMBER, EG: 5, not five or fifth'
         calc_age = ' '
